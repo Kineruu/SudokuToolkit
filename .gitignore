@@ -1,0 +1,11 @@
+__pycache__
+.vscode/
+.idea/
+.py[cod]
+desktop.ini
+*.bak
+*.old
+*.env
+.env
+*.log
+*.pyc
