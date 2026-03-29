@@ -15,6 +15,10 @@ HARDNUMBERS = 6
 
 difficulty = input("[DIFFICULTY (EASY, MEDIUM, HARD)]: ").upper()
 
+if difficulty not in ["EASY", "MEDIUM", "HARD"]:
+    print("Invalid difficulty, setting difficulty to EASY mode.")
+    difficulty = "EASY"
+
 # I want to first generate the whole board and then based on the difficuly, removed X amount of numbers from each row
 
 def getPossibleRowNumbers():
@@ -30,6 +34,9 @@ def getPossibleRowNumbers():
 
         elif difficulty == "HARD":
             removeCount = HARDNUMBERS
+
+        else:
+            removeCount = EASYNUMBERS
 
         for amount in range(removeCount):
             number = random.choice(numbers)
