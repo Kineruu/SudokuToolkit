@@ -9,12 +9,15 @@ possibleRowNumbers = []
 board = [[0]*9 for i in range(9)]
 
 # Difficulties
-EASYNUMBERS = 2
-MEDIUMNUMBERS = 4
-HARDNUMBERS = 6
+# I think that's better
+EASYNUMBERS = random.randint(2, 3)
+MEDIUMNUMBERS = random.randint(4, 5)
+HARDNUMBERS = random.randint(6, 8)
 
 difficulty = input("[DIFFICULTY (EASY, MEDIUM, HARD)]: ").upper()
 
+
+# If the user writes something else.
 if difficulty not in ["EASY", "MEDIUM", "HARD"]:
     print("Invalid difficulty, setting difficulty to EASY mode.")
     difficulty = "EASY"
@@ -26,7 +29,9 @@ def getPossibleRowNumbers():
     for rows in range(9):
         numbers = list(range(1, 10))
 
+        # If difficulty is equal to EASY
         if difficulty == "EASY":
+            # Set "removeCount" to a variable EASYNUMBERS
             removeCount = EASYNUMBERS
         
         elif difficulty == "MEDIUM":
@@ -36,24 +41,21 @@ def getPossibleRowNumbers():
             removeCount = HARDNUMBERS
 
         else:
+            # In case something goes wrong
             removeCount = EASYNUMBERS
 
+        # Learnt that today, this is fun
         removePositions = random.sample(range(9), removeCount)
         for i in removePositions:
             numbers[i] = 0
 
         possibleRowNumbers.append(numbers)
 
-#def printBoard():
-#    for i in range(9):
-#        print(possibleRowNumbers[i])
-#
-#       if (i + 1) % 3 == 0:
-#            print()
 
+# Yes that's the same code that I used in the solver.py file
 # Printing out the board...?
 def printBoard():
-    # For each row that's in the userNumbers
+    # For each row 
     for i in range(9):
         # Every 3 rows and if i is not equal to 0 so it doesn't write it at the beginning
         if i % 3 == 0 and i != 0:
