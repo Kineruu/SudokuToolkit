@@ -38,12 +38,20 @@ def getPossibleRowNumbers():
         else:
             removeCount = EASYNUMBERS
 
-        for amount in range(removeCount):
-            number = random.choice(numbers)
-            numbers.remove(number)
-    
+        removePositions = random.sample(range(9), removeCount)
+        for i in removePositions:
+            numbers[i] = 0
+
         possibleRowNumbers.append(numbers)
+
+def printBoard():
+    for i in range(9):
+        print(possibleRowNumbers[i])
+
+        if (i + 1) % 3 == 0:
+            print()
 
 if __name__ == "__main__":
     getPossibleRowNumbers()
-    print(possibleRowNumbers)
+    printBoard()
+    
