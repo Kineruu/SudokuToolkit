@@ -57,8 +57,22 @@ def getUserNumbers():
 # Printing out the board...?
 def printBoard():
     # For each row that's in the userNumbers
-    for row in userNumbers:
-        print(row)
+    for i in range(9):
+        # Every 3 rows and if i is not equal to 0 so it doesn't write it at the beginning
+        if i % 3 == 0 and i != 0:
+            # Prints it "*" 21 times
+            print("-" * 21)
+    
+        for j in range(9):
+            # Every 3 numbers
+            if j % 3 == 0 and j != 0:
+                print("|", end=" ")
+
+            number = userNumbers[i][j]
+            value = number if number != 0 else "_"
+            print(value, end=" ")
+    
+        print()
 
 # Getting empty spaces
 def findEmptySpace():
@@ -103,11 +117,11 @@ def findEmptySpace():
 
                     # This is used to find the top left corner of the 3x3 box
                     boxRow = (row // 3) * 3
-                    rowCol = (col // 3) * 3
+                    boxCol = (col // 3) * 3
 
                     boxSet = set()
                     for r in range(boxRow, boxRow + 3):
-                        for c in range(rowCol, rowCol + 3):
+                        for c in range(boxCol, boxCol + 3):
                             boxSet.add(userNumbers[r][c])
                     boxSet.discard(0)
 
@@ -200,14 +214,13 @@ if __name__ == "__main__":
     print("")
     getUserNumbers()
 
-    print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
     printBoard()
-    print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
 
     if debugging:
         findRemaining()
 
     findEmptySpace()
+
     if backtracking():
         printBoard()
     else:
