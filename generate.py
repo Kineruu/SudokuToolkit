@@ -9,20 +9,16 @@ possibleRowNumbers = []
 board = [[0]*9 for i in range(9)]
 
 # Difficulties
-# I think that's better
 EASYNUMBERS = random.randint(2, 3)
 MEDIUMNUMBERS = random.randint(4, 5)
 HARDNUMBERS = random.randint(6, 8)
 
 difficulty = input("[DIFFICULTY (EASY, MEDIUM, HARD)]: ").upper()
 
-
 # If the user writes something else.
 if difficulty not in ["EASY", "MEDIUM", "HARD"]:
     print("Invalid difficulty, setting difficulty to EASY mode.")
     difficulty = "EASY"
-
-# I want to first generate the whole board and then based on the difficuly, removed X amount of numbers from each row
 
 def getPossibleRowNumbers():
     global possibleRowNumbers
@@ -50,7 +46,6 @@ def getPossibleRowNumbers():
             numbers[i] = 0
 
         possibleRowNumbers.append(numbers)
-
 
 # Yes that's the same code that I used in the solver.py file
 # Printing out the board...?

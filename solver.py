@@ -138,7 +138,6 @@ def findEmptySpace():
                     if debugging:
                         print(f"({row}, {col}) -> {possibleNumbers}")
 
-
 def findRemaining(): 
     """
     Checking what numbers are missing in the rows.
