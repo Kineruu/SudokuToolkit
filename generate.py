@@ -1,74 +1,46 @@
+# Imports
+from solver import backtracking, printBoard
 import random
 
-# I hope it will be working.
+raw_output = True
 
-allNumbers = list(range(1, 10))
-possibleRowNumbers = []
+def generateBoard(difficulty="EASY"):
+    """
+    Generates a sudoku board based on the difficulty that's provided in the argument
+    """
 
-# Setting up the board
-board = [[0]*9 for i in range(9)]
+    board = [[0]*9 for _ in range(9)]
 
-# Difficulties
-EASYNUMBERS = random.randint(2, 3)
-MEDIUMNUMBERS = random.randint(4, 5)
-HARDNUMBERS = random.randint(6, 8)
+    backtracking(board) # Let's see if this will work at all LOL
 
-difficulty = input("[DIFFICULTY (EASY, MEDIUM, HARD)]: ").upper()
+    if difficulty == "EASY":
+        remove_count = random.randint(1, 2)
+    elif difficulty == "MEDIUM":
+        remove_count = random.randint(3, 4)
+    elif difficulty == "HARD":
+        remove_count = random.randint(5, 6)
+    elif difficulty == "EXPERT":
+        remove_count = random.randint(7, 8)
+    else:
+        remove_count = 3
 
-# If the user writes something else.
-if difficulty not in ["EASY", "MEDIUM", "HARD"]:
-    print("Invalid difficulty, setting difficulty to EASY mode.")
-    difficulty = "EASY"
+    for _ in range(9):
+        positions = random.sample(range(9), remove_count)
+        for position in positions:
+            board[_][position] = 0
 
-def getPossibleRowNumbers():
-    global possibleRowNumbers
-    for rows in range(9):
-        numbers = list(range(1, 10))
-
-        # If difficulty is equal to EASY
-        if difficulty == "EASY":
-            # Set "removeCount" to a variable EASYNUMBERS
-            removeCount = EASYNUMBERS
-        
-        elif difficulty == "MEDIUM":
-            removeCount = MEDIUMNUMBERS
-
-        elif difficulty == "HARD":
-            removeCount = HARDNUMBERS
-
-        else:
-            # In case something goes wrong
-            removeCount = EASYNUMBERS
-
-        # Learnt that today, this is fun
-        removePositions = random.sample(range(9), removeCount)
-        for i in removePositions:
-            numbers[i] = 0
-
-        possibleRowNumbers.append(numbers)
-
-# Yes that's the same code that I used in the solver.py file
-# Printing out the board...?
-def printBoard():
-    # For each row 
-    for i in range(9):
-        # Every 3 rows and if i is not equal to 0 so it doesn't write it at the beginning
-        if i % 3 == 0 and i != 0:
-            # Prints it "*" 21 times
-            print("-" * 21)
-    
-        for j in range(9):
-            # Every 3 numbers
-            if j % 3 == 0 and j != 0:
-                print("|", end=" ")
-
-            number = possibleRowNumbers[i][j]
-            value = number if number != 0 else "_"
-            print(value, end=" ")
-    
-        print()
+    return board
 
 if __name__ == "__main__":
-    getPossibleRowNumbers()
-    printBoard()
-    
+    difficulty = input("[DIFFICULTY (EASY, MEDIUM, HARD, EXPERT)]: ").upper()
+
+    # If the user writes something else.
+    if difficulty not in ["EASY", "MEDIUM", "HARD", "EXPERT"]:
+        print("Invalid difficulty, setting difficulty to EASY mode.")
+        difficulty = "EASY"
+
+    print()
+    #generateBoard(difficulty)
+    printBoard(generateBoard(difficulty))
+    print()
+    input()

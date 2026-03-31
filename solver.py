@@ -11,6 +11,26 @@ checking = True
 # Says for itself
 debugging = False
 
+# Prints out the board.
+def printBoard(board=None):
+    if board == None:
+        board = userNumbers
+    # For each row that's in the userNumbers
+    for i in range(9):
+        # Every 3 rows and if i is not equal to 0 so it doesn't write it at the beginning
+        if i % 3 == 0 and i != 0:
+            # Prints it "*" 21 times
+            print("-" * 21)
+    
+        for j in range(9):
+            # Every 3 numbers
+            if j % 3 == 0 and j != 0:
+                print("|", end=" ")
+
+            number = board[i][j] if board[i][j] != 0 else "_"
+            print(number, end=" ")
+        print()
+
 # A function that gets user's numbers...
 def getUserNumbers():    
     """
@@ -53,26 +73,6 @@ def getUserNumbers():
                 print("You must only enter numbers!")
                 print("Restart the program to insert the numbers again.")
                 break
-
-# Printing out the board...?
-def printBoard():
-    # For each row that's in the userNumbers
-    for i in range(9):
-        # Every 3 rows and if i is not equal to 0 so it doesn't write it at the beginning
-        if i % 3 == 0 and i != 0:
-            # Prints it "*" 21 times
-            print("-" * 21)
-    
-        for j in range(9):
-            # Every 3 numbers
-            if j % 3 == 0 and j != 0:
-                print("|", end=" ")
-
-            number = userNumbers[i][j]
-            value = number if number != 0 else "_"
-            print(value, end=" ")
-    
-        print()
 
 # Getting empty spaces
 def findEmptySpace():
@@ -138,10 +138,13 @@ def findEmptySpace():
                     if debugging:
                         print(f"({row}, {col}) -> {possibleNumbers}")
 
-def findRemaining(): 
+def findRemaining(board=None): 
     """
     Checking what numbers are missing in the rows.
     """
+
+    if board == None:
+        board = userNumbers
 
     # Printing the numbers that user entered into a set
     for row in userNumbers:
@@ -161,18 +164,21 @@ def findRemaining():
     
     print(missingNumbers)
 
-def isNumberSafe(row, col, number):
+def isNumberSafe(row, col, number, board):
     """
     Checks whether the number that wants to be put into the cell is safe.
     """
 
+    if board == None:
+        board = userNumbers
+
     # If a number is already in the row, it cannot be put into the cell.
-    if number in userNumbers[row]:
+    if number in board[row]:
         return False
 
     # If a number is in the column, it cannot be put into the cell   
     for r in range(9):
-        if userNumbers[r][col] == number:
+        if board[r][col] == number:
             return False
         
     boxRow = (row // 3) * 3
@@ -181,29 +187,33 @@ def isNumberSafe(row, col, number):
     # Checks whether the number is already in the box
     for r in range(boxRow, boxRow + 3):
         for c in range(boxCol, boxCol + 3):
-            if userNumbers[r][c] == number:
+            if board[r][c] == number:
                 return False
 
     return True
 
-def backtracking():
+def backtracking(board):
+
+    if board == None:
+        board = userNumbers
+
     # For each row
     for row in range(9):
         # For each column
         for col in range(9):
             # If the number is equal to zero
-            if userNumbers[row][col] == 0:
+            if board[row][col] == 0:
                 # For numbers in the range 1 to 9
                 for numbers in range(1, 10):
                     # if... calls the function
-                    if isNumberSafe(row, col, numbers):
-                        # Sets the userNumbers[row][col] to the numbers
-                        userNumbers[row][col] = numbers
+                    if isNumberSafe(row, col, numbers, board):
+                        # Sets the board[row][col] to the numbers
+                        board[row][col] = numbers
                         # Calls itself in the function. That's named recursion.
-                        if backtracking():
+                        if backtracking(board):
                             return True
                         # Sets the number to zero if it fails to go further
-                        userNumbers[row][col] = 0
+                        board[row][col] = 0
                 return False
     return True
 
@@ -213,6 +223,7 @@ if __name__ == "__main__":
     print("")
     getUserNumbers()
 
+    print()
     printBoard()
 
     if debugging:
@@ -220,7 +231,10 @@ if __name__ == "__main__":
 
     findEmptySpace()
 
-    if backtracking():
+    if backtracking(userNumbers):
+        print()
         printBoard()
+        input()
     else:
         print("The board cannot be solved!")
+        input()
