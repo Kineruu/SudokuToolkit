@@ -2,8 +2,7 @@
 from solver import backtracking, printBoard
 import random
 
-raw_output = True
-
+# Main function
 def generateBoard(difficulty="EASY"):
     """
     Generates a sudoku board based on the difficulty that's provided in the argument
@@ -40,7 +39,5 @@ if __name__ == "__main__":
         difficulty = "EASY"
 
     print()
-    #generateBoard(difficulty)
     printBoard(generateBoard(difficulty))
-    print()
     input()

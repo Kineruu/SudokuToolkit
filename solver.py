@@ -42,7 +42,7 @@ def getUserNumbers():
     global userNumbers
 
     # Explaining the basic common stuff.
-    print("You must enter 9 numbers. If you got a situation where there is no number between two numbers just add an empty space by putting 0 there... An example: 1 - 2 -> 1 0 2")
+    print("You must enter 9 numbers. \nIf you got a situation where there is no number between two numbers \njust add an empty space by putting 0 there... An example: 1 - 2 -> 1 0 2")
     # Do this 9 times
     for i in range(9):
         # Basically checking whether the user understands basic sudoku rules and what is said in the print statement
