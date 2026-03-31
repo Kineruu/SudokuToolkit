@@ -13,13 +13,13 @@ def generateBoard(difficulty="EASY"):
 
     backtracking(board) # Let's see if this will work at all LOL
 
-    if difficulty == "EASY":
+    if difficulty == "EASY" or difficulty == "1":
         remove_count = random.randint(1, 2)
-    elif difficulty == "MEDIUM":
+    elif difficulty == "MEDIUM" or difficulty == "2":
         remove_count = random.randint(3, 4)
-    elif difficulty == "HARD":
+    elif difficulty == "HARD" or difficulty == "3":
         remove_count = random.randint(5, 6)
-    elif difficulty == "EXPERT":
+    elif difficulty == "EXPERT" or difficulty == "4":
         remove_count = random.randint(7, 8)
     else:
         remove_count = 3
@@ -32,10 +32,10 @@ def generateBoard(difficulty="EASY"):
     return board
 
 if __name__ == "__main__":
-    difficulty = input("[DIFFICULTY (EASY, MEDIUM, HARD, EXPERT)]: ").upper()
+    difficulty = input("[DIFFICULTY (EASY - 1, MEDIUM - 2, HARD - 3, EXPERT - 4)]: ").upper()
 
     # If the user writes something else.
-    if difficulty not in ["EASY", "MEDIUM", "HARD", "EXPERT"]:
+    if difficulty not in ["EASY", "1", "MEDIUM", "2", "HARD", "3", "EXPERT", "4"]:
         print("Invalid difficulty, setting difficulty to EASY mode.")
         difficulty = "EASY"
 
