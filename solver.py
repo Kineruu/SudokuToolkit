@@ -68,7 +68,6 @@ def getUserNumbers():
                 else:
                     # Otherwise the user probably put something wrong and it's not a number... Or it's too long or too short
                     print("You must enter 9 numbers!")
-            # I honestly don't know if that part is even important 
             except ValueError:
                 print("You must only enter numbers!")
                 print("Restart the program to insert the numbers again.")
@@ -78,7 +77,6 @@ def getUserNumbers():
 def findEmptySpace():
     global checking
 
-    # Putting it in the "while" because otherwise it would run only once... I think so at least
     while checking:
         checking = False
         # for each row
@@ -86,11 +84,8 @@ def findEmptySpace():
             # for each column
             for col in range(9):
                 # if the number in row and col is equal to 0
-                # I think that's the most important line in this entire code.
                 # Detects 0s.
                 if userNumbers[row][col] == 0:
-                    # print its coordinates
-
                     # Get all values from the userNumers/current column but I'm using differnet variable
                     # So "row" and "r" don't override each other.
 
