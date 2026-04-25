@@ -13,20 +13,20 @@ def generateBoard(difficulty="EASY"):
     backtracking(board) # Let's see if this will work at all LOL
 
     if difficulty == "EASY" or difficulty == "1":
-        remove_count = random.randint(1, 2)
+        remove_count = random.randint(30, 45)
     elif difficulty == "MEDIUM" or difficulty == "2":
-        remove_count = random.randint(3, 4)
+        remove_count = random.randint(45, 55)
     elif difficulty == "HARD" or difficulty == "3":
-        remove_count = random.randint(5, 6)
+        remove_count = random.randint(55, 65)
     elif difficulty == "EXPERT" or difficulty == "4":
-        remove_count = random.randint(7, 8)
+        remove_count = random.randint(65, 75)
     else:
-        remove_count = 3
+        remove_count = 52
 
-    for _ in range(9):
-        positions = random.sample(range(9), remove_count)
-        for position in positions:
-            board[_][position] = 0
+    for _ in range(remove_count):
+        row = random.randint(0, 8)
+        col = random.randint(0, 8)
+        board[row][col] = 0
 
     return board
 

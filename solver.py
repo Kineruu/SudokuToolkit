@@ -1,4 +1,6 @@
 
+import random
+
 # Important stuff
 userNumbers = []
 
@@ -187,6 +189,9 @@ def isNumberSafe(row, col, number, board):
 
     return True
 
+nums = list(range(1, 10))
+random.shuffle(nums)
+
 def backtracking(board):
 
     if board == None:
@@ -199,7 +204,7 @@ def backtracking(board):
             # If the number is equal to zero
             if board[row][col] == 0:
                 # For numbers in the range 1 to 9
-                for numbers in range(1, 10):
+                for numbers in nums:
                     # if... calls the function
                     if isNumberSafe(row, col, numbers, board):
                         # Sets the board[row][col] to the numbers
